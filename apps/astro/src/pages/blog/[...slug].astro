@@ -1,0 +1,38 @@
+---
+import { client } from '../../lib/sanity'
+
+// This tells Astro which pages to create
+export async function getStaticPaths() {
+  const posts = await client.fetch(`*[_type == "post"]{ "slug": slug.current }`)
+  
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }))
+}
+
+// Get the specific post data
+const { slug } = Astro.params
+const post = await client.fetch(
+  `*[_type == "post" && slug.current == $slug][0]`,
+  { slug }
+)
+
+if (!post) {
+  return Astro.redirect('/404')
+}
+---
+
+<html>
+  <head>
+    <title>{post.title}</title>
+  </head>
+  <body>
+    <article>
+      <h1>{post.title}</h1>
+      {post.publishedAt && (
+        <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
+      )}
+      {post.excerpt && <p>{post.excerpt}</p>}
+    </article>
+  </body>
+</html>

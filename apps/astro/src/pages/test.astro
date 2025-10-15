@@ -1,0 +1,26 @@
+---
+import { client } from '../lib/sanity'
+
+// This gets ALL documents, including drafts
+const allDocs = await client.fetch(`*[_type == "post"]`)
+
+// This gets only published
+const publishedPosts = await client.fetch(`*[_type == "post" && !(_id in path("drafts.**"))]`)
+---
+
+<html>
+  <head>
+    <title>Sanity Test</title>
+  </head>
+  <body>
+    <h1>Testing Sanity Connection</h1>
+    <p>Total documents: {allDocs.length}</p>
+    <p>Published posts: {publishedPosts.length}</p>
+    
+    <h2>All Documents:</h2>
+    <pre>{JSON.stringify(allDocs, null, 2)}</pre>
+    
+    <h2>Published Only:</h2>
+    <pre>{JSON.stringify(publishedPosts, null, 2)}</pre>
+  </body>
+</html>

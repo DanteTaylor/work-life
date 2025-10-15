@@ -1,0 +1,11 @@
+// package.json (root)
+{
+  "name": "your-project",
+  "private": true,
+  "packageManager": "pnpm@9",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "lint": "pnpm -r lint"
+  }
+}

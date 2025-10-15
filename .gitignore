@@ -1,0 +1,73 @@
+# ----------------------------
+# Common ignores for Node.js projects
+# ----------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+dist/
+.build/
+.cache/
+tmp/
+*.log
+
+# ----------------------------
+# Environment & local configs
+# ----------------------------
+.env
+.env.*.local
+.env.local
+.env.production
+.env.development
+.env.test
+.envrc
+*.pem
+*.crt
+*.key
+
+# ----------------------------
+# Astro-specific
+# ----------------------------
+# Astro build output
+/dist/
+/.astro/
+# If using image optimization cache
+/.astro-cache/
+# Astro local dev cache
+/.vite/
+# Editor preview or drafts
+.idea/
+.vscode/
+*.astro.ts
+
+# ----------------------------
+# Sanity-specific
+# ----------------------------
+# Build output
+/sanity-build/
+/studio/dist/
+/studio/.sanity/
+# Cache & temp
+.sanity/
+.sanity_runtime/
+.sanity_tmp/
+# Local datasets & backups
+/sanity-dataset-export*
+/backups/
+/exported-data/
+# GraphQL schema
+/graphql-schema.graphql
+# Generated types (optional)
+sanity.types.d.ts
+
+# ----------------------------
+# OS + misc
+# ----------------------------
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+*.tmp
+*.bak
