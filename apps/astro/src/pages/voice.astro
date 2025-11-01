@@ -6,15 +6,19 @@ const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`)
 
 <html>
   <body>
-    <h1>Blog Posts</h1>
+    <main>
+    <header>
+      <h1>Voice</h1>
+    </header>
     {posts.length === 0 && <p>No posts found</p>}
-    <ul>
+    <section aria-label="Blog post list">
       {posts.map(post => (
-        <li>
+        <article>
           <h2>{post.title}</h2>
           <p>{post.excerpt}</p>
-        </li>
+        </article>
       ))}
-    </ul>
+    </section>
+    </main>
   </body>
 </html>
