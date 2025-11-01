@@ -11,13 +11,17 @@ const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`)
       <h1>Voice</h1>
     </header>
     {posts.length === 0 && <p>No posts found</p>}
-    <section aria-label="Blog post list">
-      {posts.map(post => (
-        <article>
-          <h2>{post.title}</h2>
-          <p>{post.excerpt}</p>
-        </article>
-      ))}
+    <section aria-label="Voice blog post list">
+    {posts.map(post => (
+      <article>
+        <h2>
+          <a href={`/voice/${post.slug.current}`}>
+            {post.title}
+          </a>
+        </h2>
+        <p>{post.excerpt}</p>
+      </article>
+    ))}
     </section>
     </main>
   </body>
