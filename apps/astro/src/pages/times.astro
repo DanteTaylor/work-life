@@ -15,7 +15,7 @@ const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`)
     {posts.map(post => (
       <article>
         <h2>
-          <a href={`/voice/${post.slug.current}`}>
+          <a href={`/times/${post.slug.current}`}>
             {post.title}
           </a>
         </h2>
