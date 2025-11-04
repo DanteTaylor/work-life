@@ -1,0 +1,30 @@
+---
+import { client } from '../lib/sanity';
+import Layout from '../layouts/BlogPost.astro';
+
+// Fetch posts from Sanity
+const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`);
+
+// Define title and URL-friendly slug
+const title = "Journal";
+const url = title.toLowerCase();
+---
+
+<Layout title={title} description="Lorem ipsum dolor sit amet">
+  {posts.length === 0 ? (
+    <p>No posts found</p>
+  ) : (
+    <section aria-label="Voice blog post list">
+      {posts.map((post) => (
+        <article>
+          <h3>
+            <a href={`/${url}/${post.slug.current}`}>
+              {post.title}
+            </a>
+          </h3>
+          {post.excerpt && <p>{post.excerpt}</p>}
+        </article>
+      ))}
+    </section>
+  )}
+</Layout>
