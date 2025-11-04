@@ -1,28 +1,30 @@
 ---
-import { client } from '../lib/sanity'
+import { client } from '../lib/sanity';
+import Layout from '../layouts/BlogPost.astro';
 
-const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`)
+// Fetch posts from Sanity
+const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`);
+
+// Define title and URL-friendly slug
+const title = "Times";
+const url = title.toLowerCase();
 ---
 
-<html>
-  <body>
-    <main>
-    <header>
-      <h1>Voice</h1>
-    </header>
-    {posts.length === 0 && <p>No posts found</p>}
+<Layout title={title} description="Lorem ipsum dolor sit amet">
+  {posts.length === 0 ? (
+    <p>No posts found</p>
+  ) : (
     <section aria-label="Voice blog post list">
-    {posts.map(post => (
-      <article>
-        <h2>
-          <a href={`/times/${post.slug.current}`}>
-            {post.title}
-          </a>
-        </h2>
-        <p>{post.excerpt}</p>
-      </article>
-    ))}
+      {posts.map((post) => (
+        <article>
+          <h3>
+            <a href={`/${url}/${post.slug.current}`}>
+              {post.title}
+            </a>
+          </h3>
+          {post.excerpt && <p>{post.excerpt}</p>}
+        </article>
+      ))}
     </section>
-    </main>
-  </body>
-</html>
+  )}
+</Layout>

@@ -1,5 +1,6 @@
 ---
 import { client } from '../../lib/sanity';
+import Layout from '../../layouts/BlogPost.astro';
 
 // Step 1 — Get all posts with slugs
 export async function getStaticPaths() {
@@ -30,23 +31,21 @@ function extractTextFromBlocks(blocks = []) {
 
 const paragraphs = extractTextFromBlocks(post.body);
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <body>
-    <main class="article-container">
-      <article>
-        <section class="post-content">
-          <h1>{post.title}</h1>
 
-          {paragraphs.map(text => (
-            <p class="body">{text}</p>
-          ))}
 
-          <!-- Debug (optional)
-          <pre>{JSON.stringify(post, null, 2)}</pre>
-          -->
-        </section>
-      </article>
-    </main>
-  </body>
-</html>
+<Layout
+	title={post.title}
+	description="Lorem ipsum dolor sit amet"
+>
+	<article>
+    <section class="post-content">
+      {paragraphs.map(text => (
+        <p class="body">{text}</p>
+      ))}
+
+      <!-- Debug (optional)
+      <pre>{JSON.stringify(post, null, 2)}</pre>
+      -->
+    </section>
+  </article>
+</Layout>
