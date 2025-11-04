@@ -6,7 +6,7 @@ import Layout from '../layouts/BlogPost.astro';
 const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`);
 
 // Define title and URL-friendly slug
-const title = "Times";
+const title = "Journal";
 const url = title.toLowerCase();
 ---
 
