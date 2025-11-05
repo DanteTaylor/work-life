@@ -2,8 +2,11 @@
 import { client } from '../lib/sanity';
 import Layout from '../layouts/BlogPost.astro';
 
-// Fetch posts from Sanity
-const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`);
+// Fetch posts from Sanity, using updated timestamp as a fallback for sorting
+const posts = await client.fetch(
+	`*[_type == "post" && defined(slug.current)] | order(coalesce(publishedAt, _updatedAt) desc)`
+);
+
 
 // Define title and URL-friendly slug
 const title = "Journal";
